@@ -1,19 +1,3 @@
-
-# pop_culture = Table().read_table('Pop_Culture.csv')
-
-"""import csv
-import pandas as pd
-import os
-
-data = list()
-with open('Pop_Culture.csv', 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    hear = next(csvreader)
-    for row in csvreader:
-        data.append(row)
-
-print(data[0])"""
-
 # ask the user a series of questions
 # print the options on another line (make them choose the number like an automated phone call)
 # user input on next line
