@@ -47,11 +47,11 @@ y_pred = mL.predict(x_test)
 
 # change dashes based on what the user input is
 user_input = pd.DataFrame([{
-    "fav_film": "---"
-    "fav_soundtrack": "---"
-    "fav_spaceship": "---"
-    "fav_planet": "---"
-    "fav_robot": "---" 
+    "fav_film": ["Episode VI - Return of the Jedi"],
+    "fav_soundtrack": ["Imperial March"],
+    "fav_spaceship": ["Millennium Falcon"],
+    "fav_planet": ["Endor"],
+    "fav_robot": ["R2-D2"] 
     }])
 
 #this ranks the probabilities of matches based on user responses
@@ -79,5 +79,8 @@ print(ranking)
 
 #print(knn.score(x_test, y_test))
 
+input_array = user_input.to_numpy()
+ranking_array = ranking.to_numpy()
 
-
+plt.pie(input_array)
+plt.show()
