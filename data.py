@@ -1,52 +1,60 @@
 # ask the user a series of questions
 # print the options on another line (make them choose the number like an automated phone call)
 # user input on next line
+# input number, store answer in variable
 
 hero_answer = 'j'
 while hero_answer not in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
     print('What is your favorite Star Wars hero? (type number to answer)')
     print('1: Anakin Skywalker, 2: Chewbacca, 3: Han Solo, 4: Jar Jar Binks, 5: Leia, 6: Luke Skywalker, 7: Obi-Wan Kenobi, 8: Qui-Gon Jinn, 9: Yoda')
     hero_answer = input('')
-hero_answer = int(hero_answer)
+hero_list = ['Anakin Skywalker', 'Chewbacca', 'Han Solo', 'Jar Jar Binks', 'Leia', 'Luke Skywalker', 'Obi-Wan Kenobi', 'Qui-Gon Jinn', 'Yoda']
+hero_answer = hero_list[int(hero_answer) - 1]
 
 villain_answer = ''
 while villain_answer not in ['1', '2', '3', '4', '5', '6']:
     print('What is your favorite Star Wars villain?')
     print('1: Count Dooku, 2: Darth Maul, 3: Darth Vader, 4: General Grievous, 5: Palpatine, 6: Wilhuff Tarkin')
     villain_answer = input('')
-villain_answer = int(villain_answer)
+villain_list = ['Count Dooku', 'Darth Maul', 'Darth Vader', 'General Grievous', 'Palpatine', 'Wilhuff']
+villain_answer = villain_list[int(villain_answer) - 1]
 
 film_answer = ''
 while film_answer not in ['1', '2', '3', '4', '5', '6']:
     print('What is your favorite Star Wars Film?')
     print('1: Episode I - The Phantom Menace, 2: Episode II - Attack of the Clones, 3: Episode III - Revenge of the Sith, 4: Episode IV - A New Hope, 5: Episode V - The Empire Strikes Back, 6: Episode VI - Return of the Jedi')
     film_answer = input('')
-film_answer = int(film_answer)
+film_list = ['Episode I - The Phantom Menace', 'Episode II - Attack of the Clones', 'Episode III - Revenge of the Sith', 'Episode IV - A New Hope', 'Episode V - The Empire Strikes Back', 'Episode VI - Return of the Jedi']
+film_answer = film_list[int(film_answer) - 1]
 
 soundtrack_answer = ''
 while soundtrack_answer not in ['1', '2', '3', '4', '5']:
     print('What is your favorite Star Wars soundtrack?')
     print('1: Accross the Stars, 2: Anakin vs. Obi-Wan, 3: Imperial March, 4: Star Wars (Main Theme), 5: The Throne Room')
     soundtrack_answer = input('')
-soundtrack_answer = int(soundtrack_answer)
+soundtrack_list = ['Accross the Stars', 'Anakin vs. Obi-Wan', 'Imperial March', 'Star Wars (Main Theme)', 'The Throne Room']
+soundtrack_answer = soundtrack_list[int(soundtrack_answer) - 1]
 
 spaceship_answer = ''
 while spaceship_answer not in ['1', '2', '3', '4']:
     print('What is your favorite Star Wars spaceship?')
     print('1: Death Star, 2: Millennium Falcon, 3: Naboo Starfighter, 4: TIE Fighter')
     spaceship_answer = input('')
-spaceship_answer = int(spaceship_answer)
+spaceship_list = ['Death Star', 'Millennium Falcon', 'Naboo Starfighter', 'TIE Fighter']
+spaceship_answer = spaceship_list[int(spaceship_answer) - 1]
 
 planet_answer = ''
 while planet_answer not in ['1', '2', '3', '4', '5']:
     print('What is your favorite planet in Star Wars?')
     print('1: Alderaan, 2: Dagobah, 3: Endor, 4: Naboo, 5: Tatooine')
     planet_answer = input('')
-planet_answer = int(planet_answer)
+planet_list = ['Alderaan', 'Dagobah', 'Endor', 'Naboo', 'Tatooine']
+planet_answer = planet_list[int(planet_answer) - 1]
 
 robot_answer = ''
 while robot_answer not in ['1', '2', '3', '4']:
     print('What is your favorite robot in Star Wars?')
     print('1: Battle Droid, 2: C-3PO, 3: Droideka, 4: R2-D2')
     robot_answer = input('')
-robot_answer = int(robot_answer)
+robot_list = ['Battle Droid', 'C-3PO', 'Droideka', 'R2-D2']
+robot_answer = robot_list[int(robot_answer) - 1]
