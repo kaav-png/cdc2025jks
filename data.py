@@ -3,7 +3,7 @@
 # user input on next line
 # input number, store answer in variable
 
-hero_answer = 'j'
+hero_answer = ''
 while hero_answer not in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
     print('What is your favorite Star Wars hero? (type number to answer)')
     print('1: Anakin Skywalker, 2: Chewbacca, 3: Han Solo, 4: Jar Jar Binks, 5: Leia, 6: Luke Skywalker, 7: Obi-Wan Kenobi, 8: Qui-Gon Jinn, 9: Yoda')
@@ -16,7 +16,7 @@ while villain_answer not in ['1', '2', '3', '4', '5', '6']:
     print('What is your favorite Star Wars villain?')
     print('1: Count Dooku, 2: Darth Maul, 3: Darth Vader, 4: General Grievous, 5: Palpatine, 6: Wilhuff Tarkin')
     villain_answer = input('')
-villain_list = ['Count Dooku', 'Darth Maul', 'Darth Vader', 'General Grievous', 'Palpatine', 'Wilhuff']
+villain_list = ['Count Dooku', 'Darth Maul', 'Darth Vader', 'General Grievous', 'Palpatine', 'Wilhuff Tarkin']
 villain_answer = villain_list[int(villain_answer) - 1]
 
 film_answer = ''
