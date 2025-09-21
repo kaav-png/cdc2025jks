@@ -128,40 +128,17 @@ while True:
             
             if count == 0:
                 button_list,words_list = question_screen(count+1,question_list[count],answer_list[count],125,215)
-            user_ans = ''
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for i, button in enumerate(button_list):
                     if button.collidepoint(event.pos):
                         user_ans = words_list[i]
-                        #user_ans_list.append(user_ans[3:])
+                        user_ans_list.append(user_ans[3:])
                         count+=1
-                    
-                    if count<= 5:
-                        button_list,words_list = question_screen(count+1,question_list[count],answer_list[count],125,215)
-                    else:
-                        state = "results"
-            print(user_ans_list)
-
-    
-
-
-
+                        if count<= 5:
+                            button_list,words_list = question_screen(count+1,question_list[count],answer_list[count],125,215)
+                        else:
+                            state = "results"
     pygame.display.update()
 
-            #if event.type == pygame.KEYDOWN:
-            #    if event.key == pygame.K_BACKSPACE:
-            #        user_text = user_text[:1]
-            #    else:
-            #        user_text += event.unicode
-            
-            #pygame.draw.rect(screen,color='white')
 
-
-        #user_ans=-1
-            #while user_ans not in range(1, len(categories_list[count])+1):
-            #    print(question_screen(count+1,question_list[count],answer_list[count],125,215))
-            #    if len(categories_list[count]) == 9:
-            #        if event.type == pygame.KEYDOWN:
-            #            if event.key == pygame.K_1: user_ans = 1
-            #            if event.key == pygame.K_2: user_ans = 2
         
