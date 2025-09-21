@@ -26,3 +26,4 @@ y = data_df[["fav_heroe"]]
 knn = KNeighborsClassifier(n_neighbors=5)
 
 knn.fot(x,y)
+
