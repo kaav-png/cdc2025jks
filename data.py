@@ -2,7 +2,7 @@
 # print the options on another line (make them choose the number like an automated phone call)
 # user input on next line
 
-hero_answer = ''
+hero_answer = 'j'
 while hero_answer not in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
     print('What is your favorite Star Wars hero? (type number to answer)')
     print('1: Anakin Skywalker, 2: Chewbacca, 3: Han Solo, 4: Jar Jar Binks, 5: Leia, 6: Luke Skywalker, 7: Obi-Wan Kenobi, 8: Qui-Gon Jinn, 9: Yoda')
