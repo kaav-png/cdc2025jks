@@ -1,6 +1,10 @@
 import pygame
 import sys
 import os
+import csv
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 #colors
 black = (0,0,0)
@@ -16,7 +20,7 @@ pygame.display.set_caption("Who's Your Star Wars Match?")
         
 categories_list = [
     ['Anakin Skywalker', 'Chewbacca', 'Han Solo', 'Jar Jar Binks', 'Leia', 'Luke Skywalker', 'Obi-Wan Kenobi', 'Qui-Gon Jinn', 'Yoda'],
-    ['Count Dooku', 'Darth Maul', 'Darth Vader', 'General Grievous', 'Palpatine', 'Wilhuff'],
+    ['Count Dooku', 'Darth Maul', 'Darth Vader', 'General Grievous', 'Palpatine', 'Wilhuff Tarkin'],
     ['Episode I - The Phantom Menace', 'Episode II - Attack of the Clones', 'Episode III - Revenge of the Sith', 'Episode IV - A New Hope', 'Episode V - The Empire Strikes Back', 'Episode VI - Return of the Jedi'],
     ['Accross the Stars', 'Anakin vs. Obi-Wan', 'Imperial March', 'Star Wars (Main Theme)', 'The Throne Room'],
     ['Death Star', 'Millennium Falcon', 'Naboo Starfighter', 'TIE Fighter'],
@@ -25,12 +29,12 @@ categories_list = [
 
 question_list = [
     " What is your favorite \n    Star Wars hero? \n (type number to answer)",
-    'What is your favorite Star Wars villain?',
-    'What is your favorite Star Wars Film?',
-    'What is your favorite Star Wars soundtrack?',
-    'What is your favorite Star Wars spaceship?',
-    'What is your favorite planet in Star Wars?',
-    'What is your favorite robot in Star Wars?']
+    ' What is your favorite \n    Star Wars villain?',
+    ' What is your favorite \n    Star Wars Film?',
+    ' What is your favorite \n    Star Wars soundtrack?',
+    ' What is your favorite \n    Star Wars spaceship?',
+    ' What is your favorite \n    planet in Star Wars?',
+    ' What is your favorite \n    robot in Star Wars?']
 
 answer_list = [
     ['1: Anakin Skywalker, 2: Chewbacca, 3: Han Solo, 4: Jar Jar Binks, 5: Leia, 6: Luke Skywalker, 7: Obi-Wan Kenobi, 8: Qui-Gon Jinn, 9: Yoda'],
@@ -49,6 +53,75 @@ def set_background(s_name):
     background = pygame.image.load(os.path.join(s_name))
     screen.blit(background, (0,0))
     return background
+
+def dtc(list1:list):
+    """MACHING LEARNING HERE"""
+    data = list()
+
+        #formatting the dataset
+    with open('Pop_Culture.csv','r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        header = next(csvreader)
+        for row in csvreader:
+            data.append(row)
+
+        #converting to dataframe
+    data_df = pd.DataFrame(data)
+
+        #naming columns
+    data_df.columns = ['review_id','fav_heroe','fav_villain',"fav_film","fav_soundtrack", "fav_spaceship", "fav_planet", "fav_robot"]
+
+        #making x and y and preprocessing data
+    from sklearn.preprocessing import OneHotEncoder
+
+    x = data_df[["fav_film", "fav_soundtrack", "fav_spaceship", "fav_planet", "fav_robot"]]
+    encoded = OneHotEncoder()
+    x_mod = encoded.fit_transform(x)
+    y = data_df["fav_heroe"]
+
+        #splitting dataset and training
+    from sklearn.model_selection import train_test_split
+
+    x_train, x_test, y_train, y_test = train_test_split(x_mod, y, test_size = 0.2, random_state=60)
+
+        #testing data
+    from sklearn.tree import DecisionTreeClassifier
+    from sklearn.metrics import accuracy_score
+
+    mL = DecisionTreeClassifier(max_depth=18, random_state=42)
+    mL.fit(x_train, y_train)
+
+    y_pred = mL.predict(x_test)
+    #accuracy_score(y_test, y_pred)
+
+    # change dashes based on what the user input is
+    user_input = pd.DataFrame([{
+        "fav_film": list1[0],
+        "fav_soundtrack": list1[1],
+        "fav_spaceship": list1[2],
+        "fav_planet": list1[3],
+        "fav_robot": list1[4] 
+        }])
+## split user input into x and y..
+        #this ranks the probabilities of matches based on user responses
+    user_mod = encoded.fit_transform(user_input)
+    prediction = mL.predict(user_mod)
+
+    probability = (mL.predict_proba(user_input) * 100)
+    match = mL.classes_
+    match = match
+
+    sample_index = 0
+    sample_probs = probability[0]
+
+    ranking = pd.DataFrame({ 
+        "Match": match,
+        "Probability" : sample_probs
+    }).sort_values("Probability", ascending=False)
+
+    print(ranking)
+
+
 
 def buttonMaker(font,color,textColor,words,x,y,width,height):
     button_rect = pygame.draw.rect(screen,color,(x,y,width,height))
@@ -106,6 +179,8 @@ def is_int(value) -> bool:
 #input_rect = pygame.Rect(200,200,140,32)
 count = 0
 user_ans_list = list()
+ml_ran = False
+state = "" 
 
 while True:
     events = pygame.event.get()
@@ -129,6 +204,7 @@ while True:
             if count == 0:
                 button_list,words_list = question_screen(count+1,question_list[count],answer_list[count],125,215)
             if event.type == pygame.MOUSEBUTTONDOWN:
+                
                 for i, button in enumerate(button_list):
                     if button.collidepoint(event.pos):
                         user_ans = words_list[i]
@@ -140,5 +216,8 @@ while True:
                             state = "results"
     pygame.display.update()
 
-
+    if state == "results" and not ml_ran: #not ml_ran and 
+        print(user_ans_list)
+        ml_ran = True
+        dtc(user_ans_list)
         
